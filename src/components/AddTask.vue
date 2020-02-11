@@ -17,6 +17,7 @@ export default {
       if (this.title.trim()) {
         const newTask = {
           title: this.title,
+          id: Date.now(),
         };
 
         this.$emit("add-task", newTask);

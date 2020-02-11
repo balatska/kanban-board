@@ -2,14 +2,15 @@
   <div>
     <h2>{{name}}</h2>
     <hr/>
-    <Task class="task" 
-    v-for="task in tasks" 
-    :key="task.id" 
-    :task="task.title"
-    @remove-task="removeTask"
-    >
-    
-    </Task> 
+    <draggable v-model="tasks" group="people" @start="drag=true" @end="drag=false">
+      <Task class="task" 
+      v-for="task in tasks" 
+      :key="task.id" 
+      :task="task"
+      @remove-task="removeTask"
+      >
+      </Task> 
+    </draggable>
     <AddTask @add-task="addTask"/> 
   </div>
 </template>
@@ -17,6 +18,7 @@
 <script>
 import Task from "@/components/Task";
 import AddTask from "@/components/AddTask";
+import draggable from 'vuedraggable'
 export default {
   props: {
     name: {
@@ -24,12 +26,12 @@ export default {
       default: ''
     }, 
     tasks: {
-      type: Array,
+      type: Array, 
       default: []
     }
   },
   components: {
-    Task, AddTask
+    Task, AddTask, draggable,
   },
   data() {
     return {};
@@ -39,8 +41,14 @@ export default {
       this.tasks.push(task)
     },
     removeTask(id) {
-      this.$emit('remove-task', id)
-      console.log(id)
+      // this.$emit('remove-task', id) {
+      //   this.$emit(id)
+      // }
+
+      // this.$emit('remove-task', {
+      //   taskId: id,
+      //   columnId: this.columnId
+      // });
     }
   }
 };
@@ -73,5 +81,7 @@ h2 {
     box-shadow: 0px 0px 19px -6px rgba(0,0,0,0.7);
   }
 }
-
+.data-v-6e7fde86 {
+  padding: 15px;
+}
 </style>

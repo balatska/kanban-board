@@ -1,24 +1,17 @@
 <template>
     <div >
-        {{ task }}
+        {{ task.title }}
         <button class="remove" title="Удалить" @click="$emit('remove-task', task.id)">&times;</button>
     </div>
-     <!-- @remove-task="removeTask" -->
 </template>
 
 <script>
 export default {
     props: {
         task: {
-            type: String,
-            default: ''
+            type: Object,
         }
     },
-    // methods: {
-    //   removeTask(task) {
-    //     this.$emit('remove-task', task)
-    //   }
-    // }
 }
 </script>
 

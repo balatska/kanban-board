@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <h1>Kanban board</h1>
-    <hr />
+    <h1>Personal Kanban board</h1>
     <div class="container">
       <Column class="column"
         v-for="(column, i) in board"
@@ -23,9 +22,9 @@ export default {
     Column
   },
   methods: {
-    removeTask(task) {
-      // this.tasks = this.tasks.filter(t => t.task !==task)
-      console.log(this.tasks) 
+    removeTask(id) {
+      // this.tasks = this.tasks.filter(t => t.id !==id)
+      // console.log() 
     }
   },
   data() {
@@ -34,6 +33,7 @@ export default {
         { 
           name: "ideas", 
           description: "ideas", 
+          id: 1,
           tasks: [
             { id: 1, title: "Выучить Vue" },
             { id: 2, title: "Отпраздновать выпуск" },
@@ -44,23 +44,26 @@ export default {
         { 
           name: "todo", 
           description: "to do...", 
+          id: 2,
           tasks: [
-            { id: 1, title: "Выучить Vue" },
+            { id: 1, title: "Купить платье" },
           ] 
         },
         { 
           name: "in progress", 
           description: "in progress...", 
+          id: 3,
           tasks: [
-            { id: 4, title: "Не унывать" }
+            { id: 4, title: "Защитить проект" }
           ] 
         },
         { 
           name: "done", 
           description: "done...", 
+          id: 4,
           tasks: [
-            { id: 3, title: "Найти работу" },
-            { id: 4, title: "Не унывать" }
+            { id: 3, title: "Записаться на курс в Beetroot" },
+            { id: 4, title: "Сделать настоящее тестовое" }
           ] 
         }]      
     };
@@ -69,23 +72,18 @@ export default {
 </script>
  
 <style lang="scss" scoped>
-body {
-  margin: 0 auto;
-  width: 100%;
-  height: 100vh;
-  // background-image: url(@/assets/img3.jpg);
-}
-// #app {
-
-// }
 .column {
-  // width: 240px;
   width: 18%;
   height: auto;
+  min-height: 400px;
   margin-top: 10px;
   box-shadow: 0px 0px 19px -4px rgba(0,0,0,0.5);
   padding: 25px;
   border-radius: 4px;
+
+  &>div {
+    padding: 15px;
+  }
 }
 .container {
   display:flex;
@@ -93,6 +91,9 @@ body {
 }
 h1 {
   text-align: center;
+  text-transform: uppercase;
+  color: rgb(68, 67, 67);
+  margin: 30px 0;
 }
 </style>
 
