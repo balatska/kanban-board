@@ -1,29 +1,77 @@
 <template>
   <div>
-    {{ statuses }}
-    <!-- <Task 
-    :tasks="tasks" 
-    v-for="(task, index) in tasks" :key="index"
-    /> -->
+    <h2>{{name}}</h2>
+    <hr/>
+    <Task class="task" 
+    v-for="task in tasks" 
+    :key="task.id" 
+    :task="task.title"
+    @remove-task="removeTask"
+    >
+    
+    </Task> 
+    <AddTask @add-task="addTask"/> 
   </div>
 </template>
 
 <script>
 import Task from "@/components/Task";
+import AddTask from "@/components/AddTask";
 export default {
-  props: ["statuses"],
+  props: {
+    name: {
+      type: String,
+      default: ''
+    }, 
+    tasks: {
+      type: Array,
+      default: []
+    }
+  },
   components: {
-    Task
+    Task, AddTask
   },
   data() {
-    return {
-      tasks: [
-        { id: 1, title: "Выучить Vue" },
-        { id: 2, title: "Отпраздновать выпуск из Beetroot" },
-        { id: 3, title: "Найти работу" },
-        { id: 4, title: "Не унывать" }
-      ]
-    } 
+    return {};
+  },
+  methods: {
+    addTask(task) {
+      this.tasks.push(task)
+    },
+    removeTask(id) {
+      this.$emit('remove-task', id)
+      console.log(id)
+    }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+h2 {
+  width: 100%;
+  color: #112e7e;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: bold;
+  font-size: 28px;
+}
+.task {
+  width: 100%;
+  height: 60px;
+  margin: 20px 0;
+  background-color: rgba(153, 121, 182, 0.5);
+  border-radius: 4px;
+  box-shadow: 0px 0px 19px -6px rgba(0,0,0,0.5);
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  position: relative;
+  
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 19px -6px rgba(0,0,0,0.7);
+  }
+}
+
+</style>
