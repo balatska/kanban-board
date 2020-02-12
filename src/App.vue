@@ -7,6 +7,7 @@
         :key="i"
         :tasks="column.tasks"
         :name="column.name"
+        @add-task="newTask"
         @remove-task="removeTask"
       />
     </div>
@@ -22,9 +23,13 @@ export default {
     Column
   },
   methods: {
-    removeTask(id) {
-      // this.tasks = this.tasks.filter(t => t.id !==id)
-      // console.log() 
+    removeTask({column, task}) {
+      const col = this.board.findIndex(item => item.name === column)
+      const item = this.board[col].tasks.findIndex(item => item.id === task.id)
+      this.board[col].tasks.splice(item, 1)      
+    },
+    newTask({column, task}) {
+      this.board[this.board.findIndex(item => item.name === column)].tasks.push(task)
     }
   },
   data() {
@@ -46,7 +51,7 @@ export default {
           description: "to do...", 
           id: 2,
           tasks: [
-            { id: 1, title: "Купить платье" },
+            { id: 5, title: "Купить платье" },
           ] 
         },
         { 
@@ -54,7 +59,7 @@ export default {
           description: "in progress...", 
           id: 3,
           tasks: [
-            { id: 4, title: "Защитить проект" }
+            { id: 6, title: "Защитить проект" }
           ] 
         },
         { 
@@ -62,8 +67,8 @@ export default {
           description: "done...", 
           id: 4,
           tasks: [
-            { id: 3, title: "Записаться на курс в Beetroot" },
-            { id: 4, title: "Сделать настоящее тестовое" }
+            { id: 7, title: "Записаться на курс в Beetroot" },
+            { id: 8, title: "Сделать настоящее тестовое" }
           ] 
         }]      
     };
@@ -76,10 +81,9 @@ export default {
   width: 18%;
   height: auto;
   min-height: 400px;
-  margin-top: 10px;
-  box-shadow: 0px 0px 19px -4px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 22px -6px rgba(0,0,0,0.2);
   padding: 25px;
-  border-radius: 4px;
+  border-radius: 8px;
 
   &>div {
     padding: 15px;
@@ -92,8 +96,10 @@ export default {
 h1 {
   text-align: center;
   text-transform: uppercase;
-  color: rgb(68, 67, 67);
+  color: rgb(48, 20, 61);
   margin: 30px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
 }
 </style>
 

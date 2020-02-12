@@ -1,7 +1,7 @@
 <template>
     <div >
         {{ task.title }}
-        <button class="remove" title="Удалить" @click="$emit('remove-task', task.id)">&times;</button>
+        <button class="remove" title="Удалить" @click="$emit('remove-task', task)">&times;</button>
     </div>
 </template>
 
@@ -17,15 +17,15 @@ export default {
 
 <style lang="scss" scoped>
   button {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     background-color: rgba(255, 255, 255, 0.4);
     border: none;
     color: gray;
     border-radius: 50%;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: calc(50% - 11px);
+    right: 10px;
     text-align: center;
     line-height: 20px;
     outline: none;
